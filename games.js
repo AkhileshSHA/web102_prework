@@ -1,5 +1,5 @@
-// Image credits: Kickstarter
-const games = ` [
+// Assume the games variable is defined as follows
+const games = [
   {
     "name": "Heroes Of Mythic Americas",
     "description": "An exciting 5e RPG supplement that heroically represents pre-Columbian American cultures and mythologies",
@@ -88,17 +88,36 @@ const games = ` [
     "backers": 9264,
     "img": "./assets/kingdom_death.png"
   }
-]
-`
-const template = `
-{
-"name": "",
-"description": "",
-"pledged": 0,
-"goal": 0,
-"backers": 0,
-"img": ""
-},
-`
+];
 
-export default games;
+// Define the function to add games to the page
+function addGamesToPage(games) {
+  // Get the container element where games will be added
+  const container = document.getElementById('games-container');
+
+  // Loop over each game in the games array
+  for (let i = 0; i < games.length; i++) {
+    const game = games[i];
+
+    // Create a new div element for the game card and add the class
+    const gameCard = document.createElement('div');
+    gameCard.classList.add('game-card');
+
+    // Set the inner HTML of the gameCard div using a template literal
+    gameCard.innerHTML = `
+      <img src="${game.img}" alt="${game.name}" class="game-img">
+      <h2>${game.name}</h2>
+      <p>${game.description}</p>
+      <p>Pledged: $${game.pledged}</p>
+      <p>Goal: $${game.goal}</p>
+      <p>Backers: ${game.backers}</p>
+    `;
+
+    // Append the gameCard div to the container
+    container.appendChild(gameCard);
+  }
+}
+
+// Call the function with the games variable
+addGamesToPage(games);
+
